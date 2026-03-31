@@ -1,4 +1,11 @@
 
+document.addEventListener("DOMContentLoaded", () => {
+    //valida_sessao();
+
+    if (document.getElementById("lista")) {
+        carregarDados();
+    }
+});
 
 const botaoNovo = document.getElementById("novaViagem");
 if (botaoNovo) {
@@ -16,12 +23,11 @@ async function carregarDados() {
 
         var html = `<table>
         <tr>
-            <th>Ações</th>
-            <th>Data</th>
-            <th>Hora</th>
             <th>Título</th>
-            <th>Local</th>
             <th>Descrição</th>
+            <th>Ponto de Partida</th>
+            <th>Ponto de Chegada</th>
+            <th>Data e Hora</th>
         </tr>`;
 
         for (var i = 0; i < registros.length; i++) {
@@ -32,11 +38,11 @@ async function carregarDados() {
                             <a href='alterar_evento.html?id=${objeto.id}' class='alterar'>Alterar</a>
                             <a href='#' onclick='excluir(${objeto.id})' class='excluir'>Excluir</a>
                         </td>
-                        <td>${objeto.data}</td>
-                        <td>${objeto.hora}</td>
                         <td>${objeto.titulo}</td>
-                        <td>${objeto.local}</td>
                         <td>${objeto.descricao}</td>
+                        <td>${objeto.pontoPartida}</td>
+                        <td>${objeto.pontoChegada}</td>
+                        <td>${objeto.dataHora}</td>
                     </tr>`;
         }
         html += "</table>"
