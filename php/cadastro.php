@@ -27,7 +27,7 @@
     } else {
         $retorno = [
             'status' => 'nok',
-            'mensagem' => 'Não foi possível inserir o registro',
+            'mensagem' => 'ERRO: Não foi possível inserir o registro de usuário',
             'data' => [] 
         ]; 
 

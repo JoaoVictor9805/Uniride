@@ -24,26 +24,6 @@ async function novo() {
     var nascimento = document.getElementById("nascimento").value;
     var motorista = document.getElementById("motorista").checked;
 
-    
-    if (this.motorista == true) {
-        await cadastrarMotorista();
-        var dataVencimento = document.getElementById("dataVencimento").value;
-        var numeroRegistro = document.getElementById("numeroRegistro").value;
-        var cpf = document.getElementById("cpf").value;
-
-        const fdMotorista = new FormData();
-        fdMotorista.append('dataVencimento', dataVencimento);
-        fdMotorista.append('numeroRegistro', numeroRegistro);
-        fdMotorista.append('cpf', cpf);
-
-        const retornoMotorista = await fetch("../php/cadastro_motorista.php", {
-            method: "POST",
-            body: fdMotorista
-        });
-
-        const respostaMotorista = await retornoMotorista.json();
-    }
-
     const fd = new FormData();
     fd.append('nome', nome);
     fd.append('senha', senha);
@@ -58,12 +38,42 @@ async function novo() {
 
     const resposta = await retorno.json();
 
-    if(resposta.status == "ok") {
-        alert("Sucesso! " + resposta.mensagem);
-        window.location.href="../home/index.html";
-    } else {
-        alert("ERRO! " + resposta.mensagem);
-    }
+    if (motorista ==  false) {
+        console.log("PRIMEIRO IF");
+        if(resposta.status == "ok") {
+        console.log("SEGUNDO IF");
+            alert("Sucesso! " + resposta.mensagem);
+            window.location.href="../home/index.html";
+        } else {
+            alert("ERRO! " + resposta.mensagem);
+        }
 
+    } else {
+        console.log("ELSE MOTORISTA");
+
+        var dataVencimento = document.getElementById("dataVencimento").value;
+        var numeroRegistro = document.getElementById("numeroRegistro").value;
+        var cpf = document.getElementById("cpf").value;
+
+        const fdMotorista = new FormData();
+        fdMotorista.append('dataVencimento', dataVencimento);
+        fdMotorista.append('numeroRegistro', numeroRegistro);
+        fdMotorista.append('cpf', cpf);
+
+        const retornoMotorista = await fetch("../php/cadastroMotorista.php", {
+            method: "POST",
+            body: fdMotorista
+        });
+
+        const respostaMotorista = await retornoMotorista.json();
+
+        if(respostaMotorista.status == "ok" && resposta.status == "ok") {
+            alert("Sucesso! redirecionando você para a página inicial.");
+            window.location.href="../home/index.html";
+        } else {
+            alert(resposta.mensagem + "/" + respostaMotorista.mensagem);
+        }
+    }
 }
+
 
