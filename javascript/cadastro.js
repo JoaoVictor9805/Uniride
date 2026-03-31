@@ -39,18 +39,14 @@ async function novo() {
     const resposta = await retorno.json();
 
     if (motorista ==  false) {
-        console.log("PRIMEIRO IF");
         if(resposta.status == "ok") {
-        console.log("SEGUNDO IF");
             alert("Sucesso! " + resposta.mensagem);
-            window.location.href="../home/index.html";
+            window.location.href="../viagens/html/index.html";
         } else {
             alert("ERRO! " + resposta.mensagem);
         }
 
     } else {
-        console.log("ELSE MOTORISTA");
-
         var dataVencimento = document.getElementById("dataVencimento").value;
         var numeroRegistro = document.getElementById("numeroRegistro").value;
         var cpf = document.getElementById("cpf").value;
@@ -69,7 +65,7 @@ async function novo() {
 
         if(respostaMotorista.status == "ok" && resposta.status == "ok") {
             alert("Sucesso! redirecionando você para a página inicial.");
-            window.location.href="../home/index.html";
+            window.location.href="../viagens/html/index.html";
         } else {
             alert(resposta.mensagem + "/" + respostaMotorista.mensagem);
         }
