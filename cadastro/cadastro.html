@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+    <div class="form-container">
+    <h1>Crie sua Conta na UniRide</h1>
+        <form id="form-cadastro">
+
+            <div class="form-group">
+                <label for="email">Digite seu email: </label>
+                <input id="email" name="email" type="email">
+            </div>
+
+            <div class="form-group">
+                <label for="senha">Digite sua senha: </label>
+                <input id="senha" name="senha" type="password">
+            </div>
+
+            <div class="form-group">
+                <label for="numero">Digite seu número: </label>
+                <input id="numero" name="numero" type="tel">
+            </div>
+
+            <div class="form-group">
+                <label for="nascimento">Data de nascimento: </label>
+                <input id="nascimento" name="nascimento" type="date">
+            </div>
+
+            <div class="form-group">
+                <label>Sexo: </label>
+            </div>
+
+            <div class="form-group">
+                <input id="masculino"  value="Masculino" name="sexo" type="radio" required>
+                <label for="masculino">Masculino</label>
+
+                <input id="feminino" value="feminino" name="sexo" type="radio" required>
+                <label for="feminino">Feminino</label>
+
+                <input id="nb" value="nb" name="sexo" type="radio" required>
+                <label for="nb">Não consta</label>
+            </div>
+
+            <div class="form-group">
+                <label>Desejo receber emails e novidades</label>
+                <input id="novidades" name="novidades" type="checkbox" checked> 
+                <label for="novidades">Sim</label>
+            </div>
+
+            <div class="form-actions">
+                <a href="../index.html" id="cancelar">Voltar</a>
+                <button id="cadastrar" type="button">Cadastrar</button>
+            </div>
+
+            <script src="cadastro.js"></script>
+        </form>
+    </div>
+</body>
+</html>
