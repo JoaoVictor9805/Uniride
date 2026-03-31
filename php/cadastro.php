@@ -14,7 +14,7 @@
     $motorista      = $_POST['motorista'];
 
     $stmt = $conexao->prepare("INSERT INTO Usuario(nome, email, senha, nascimento, motorista) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $nome, $usuario, $senha, $nascimento, $motorista);
+    $stmt->bind_param("sssss", $nome, $email, $senha, $nascimento, $motorista);
     $stmt->execute();
 
     if($stmt -> affected_rows > 0){
