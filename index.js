@@ -12,15 +12,15 @@ function verificacao(){
 }
 
 async function login(){
-    var email = document.getElementById("email").value;
+    var email = document.getElementById("usuario").value;
     var senha = document.getElementById("senha").value;
-    if (!email || !senha === null){
+    if (!usuario || !senha === null){
         alert("Preencha seus dados de login!");
         localStorage.clear("sessao");
         window.location.reload;
     } else{
     const fd = new FormData();
-    fd.append("email", email);
+    fd.append("usuario", usuario);
     fd.append("senha", senha);
 
     const retorno = await fetch("php/login.php",{
