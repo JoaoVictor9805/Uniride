@@ -29,10 +29,32 @@
             <input type="date" id="nascimento" name="nascimento">
         </div>
 
+
         <div>
             <label for="motorista">Deseja ser motorista? </label>
             <input type="checkbox" id="motorista" name="motorista">
         </div>
+
+        <div id="formMotorista" style='display: none;'>
+            <h3> Digite as informações da sua CNH: </h3>
+            <p> Aviso: permitimos apenas caronas realizadas por CARRO, portanto sua carteira de motorista deve incluir categoria: B </p>
+
+            <div>
+                <label for="dataVencimento">Data de vencimento:</label>
+                <input type="date" id="dataVencimento" name="dataVencimento">
+            </div>
+
+            <div>
+                <label for="numeroRegistro">Número de registro:</label>
+                <input type="text" id="numeroRegistro" name="numeroRegistro">
+            </div>
+
+            <div>
+                <label for="cpf">CPF do condutor:</label>
+                <input type="text" id="cpf" name="cpf">
+            </div>
+        </div>
+
 
         <div>
             <button type="button" id="enviar">Cadastrar</button>        
