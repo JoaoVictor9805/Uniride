@@ -23,11 +23,14 @@ async function carregarDados() {
 
         var html = `<table>
         <tr>
+            <th>Ações</th>
             <th>Título</th>
             <th>Descrição</th>
             <th>Ponto de Partida</th>
             <th>Ponto de Chegada</th>
             <th>Data e Hora</th>
+            <th>Preço</th>
+            <th>Tipo de carona</th>
         </tr>`;
 
         for (var i = 0; i < registros.length; i++) {
@@ -43,6 +46,9 @@ async function carregarDados() {
                         <td>${objeto.pontoPartida}</td>
                         <td>${objeto.pontoChegada}</td>
                         <td>${objeto.dataHora}</td>
+                        <td>${objeto.preco}</td>
+                        <td>${objeto.tipoCarona}</td>
+
                     </tr>`;
         }
         html += "</table>"

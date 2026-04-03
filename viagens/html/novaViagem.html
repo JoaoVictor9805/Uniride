@@ -33,7 +33,7 @@
         </div>
 
         
-        <div id="opMotorista" style='display: none;'>
+        <div id="OpMotorista" style='display: none;'>
             <label for="tipoCarona">Você é motorista ou passageiro?</label>
             <select name="tipoCarona" id="tipoCarona"> 
                 <option value="passageiro">Passageiro</option>
@@ -41,16 +41,19 @@
             </select>
         </div>
             
-        <div id="preco" style='display: none;'>
-            <label for="preco">Preço: </label>
+        <div id="OpPreco" style='display: none;'>
+            <label for="preco">Preço total da viagem: </label>
             <input type="number" id="preco" name="preco">
+            <p> *Esse preço será dividido igualmente entre o motorista e os passageiros</p>
         </div>
 
         <div>
             <button type="button" id="enviar">Cadastrar viagem</button>
         </div>
 
-        <script src="../javascript/novaViagem.js"></script>
     </div>
+    
+    <script src="../javascript/novaViagem.js"></script>
+
 </body>
 </html>

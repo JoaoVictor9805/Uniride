@@ -10,19 +10,24 @@
     ]; 
 
 
-    //As variaveis que eu irei receber por $_POST, através do fetch feito em novo_evento.js;
+    $placa              = $_POST['placa'];
+    $marca              = $_POST['marca'];
+    $modelo             = $_POST['modelo'];
+    $ano                = $_POST['ano'];
+    $cor                = $_POST['cor'];
+    $renavam            = $_POST['renavam'];
+    $capacidade         = $_POST['capacidade'];
+    $gastoCombustivel   = $_POST['gastoCombustivel'];
+    $categoria          = $_POST['categoria'];
 
-    $titulo         = $_POST['titulo'];
-    $descricao      = $_POST['descricao'];
-    $dataHora       = $_POST['dataHora'];
-    $pontoPartida   = $_POST['pontoPartida'];
-    $pontoChegada   = $_POST['pontoChegada'];
-    $preco          = $_POST['preco'];
-    $tipoCarona     = $_POST['tipoCarona'];
+    session_start();
+    $usuario = $_SESSION['email'][0];
+    $usuario_id = $usuario['id_usuario'];
 
-    
-    $stmt = $conexao->prepare("INSERT INTO Viagem(titulo, dataHora, pontoPartida, pontoChegada, descricao, preco, tipoCarona) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssis", $titulo, $dataHora, $pontoPartida, $pontoChegada, $descricao, $preco, $tipoCarona); 
+
+    $stmt = $conexao->prepare("INSERT INTO veiculo(placa, marca, modelo, ano, cor, renavam, capacidade, gastoCombustivel, categoria, usuario_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+    $stmt->bind_param("ssssssidsi",$placa, $marca, $modelo, $ano, $cor, $renavam, $capacidade, $gastoCombustivel, $categoria, $usuario_id);
     $stmt->execute();
     
     if($stmt -> affected_rows > 0){

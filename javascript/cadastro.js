@@ -2,27 +2,12 @@ document.getElementById("enviar").addEventListener('click', function () {
     novo();
 });
 
-document.getElementById("motorista").addEventListener('change', function () {
-    mostrarFormMotorista();
-});
-
-
-function mostrarFormMotorista() {
-    var x = document.getElementById("formMotorista");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
-
-}
-
 async function novo() {
     var nome = document.getElementById("nome").value;
     var senha = document.getElementById("senha").value;
     var email = document.getElementById("email").value;
     var nascimento = document.getElementById("nascimento").value;
-    var motorista = document.getElementById("motorista").checked;
+    var motorista = document.getElementById("motorista").checked ? 1 : 0 // Convertendo o valor booleano para 1 ou 0 (true ou false respectivamente);
 
     const fd = new FormData();
     fd.append('nome', nome);
@@ -38,7 +23,7 @@ async function novo() {
 
     const resposta = await retorno.json();
 
-    if (motorista ==  false) {
+    if (motorista ==  0) {
         if(resposta.status == "ok") {
             alert("Sucesso! " + resposta.mensagem);
             window.location.href="../viagens/html/index.html";
@@ -72,4 +57,17 @@ async function novo() {
     }
 }
 
+document.getElementById("motorista").addEventListener('change', function () {
+    mostrarFormMotorista();
+});
 
+
+function mostrarFormMotorista() {
+    var x = document.getElementById("formMotorista");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+
+}
