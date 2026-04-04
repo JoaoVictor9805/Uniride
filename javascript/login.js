@@ -4,7 +4,6 @@ document.getElementById("enviar").addEventListener("click", () => {
     login();
 });
 
-
 const supabase = createClient(
   'https://rxawoqfetbtmatirrfth.supabase.co',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ4YXdvcWZldGJ0bWF0aXJyZnRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyMjQyOTgsImV4cCI6MjA5MDgwMDI5OH0.MhSDiPlieIOZIwO6YYjZbaIk2S6EZuAspXDjrRywPJY'
