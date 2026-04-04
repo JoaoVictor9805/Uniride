@@ -15,7 +15,7 @@ if (botaoNovo) {
 }
 
 async function carregarDados() {
-    const retorno = await fetch("../php/perfil.php");
+    const retorno = await fetch("../php/perfilCarro.php");
     const resposta = await retorno.json();
 
     if (resposta.status == "ok") {
@@ -30,7 +30,7 @@ async function carregarDados() {
                 <th>Ano</th>
                 <th>Cor</th>
                 <th>Capacidade</th>
-                <th>Gasto Combustível</th>
+                <th>Gasto de Combustível</th>
                 <th>Categoria</th>
             </tr>`;
 
@@ -39,8 +39,8 @@ async function carregarDados() {
 
             html += `<tr>
                         <td> 
-                            <a href='alterar_veiculo.html?id=${objeto.id}' class='alterar'>Alterar</a>
-                            <a href='#' onclick='excluir(${objeto.id})' class='excluir'>Excluir</a>
+                            <a href='alterarCarro.html?id=${objeto.id}' class='alterar'>Alterar</a>
+                            <a href='#' onclick='excluirCarro(${objeto.id})' class='excluir'>Excluir</a>
                         </td>
                         <td>${objeto.placa}</td>
                         <td>${objeto.marca}</td>
@@ -84,3 +84,13 @@ function mostrarCarrosCadastrados() {
     }
 };
 
+async function excluirCarro(id) {
+    const retorno = await fetch("../php/excluirCarro.php?id=" + id);
+    const resposta = await retorno.json();
+    if (resposta.status == "ok") {
+        alert(resposta.mensagem);
+        window.location.reload();
+    } else {
+        alert("Erro: " + resposta.mensagem)
+    }
+}

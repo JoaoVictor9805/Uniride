@@ -1,45 +1,52 @@
 <?php
-    include_once('conexao.php');
 
-    $retorno = [
-        'status'    => '',
-        'mensagem'  => '',
-        'data'      => []
-    ];
+include_once('conexao.php');
 
-    $stmt = $conexao->prepare("SELECT * FROM Usuario WHERE email = ? AND senha = ?");
-    $stmt->bind_param("ss",$_POST['email'],$_POST['senha']);
-    
-  
-    $stmt->execute();
-    $resultado = $stmt->get_result();
+header("Content-Type: application/json; charset=utf-8");
+
+$retorno = [
+    'status'    => '',
+    'mensagem'  => '',
+    'data'      => []
+];
+
+$email = $_POST['email'] ?? '';
+$senha = $_POST['senha'] ?? '';
+
+$stmt = $conexao->prepare("SELECT * FROM Usuario WHERE email = ? AND senha = ?");
+$stmt->bind_param("ss", $email, $senha);
+
+$stmt->execute();
+$resultado = $stmt->get_result();
+
+if($resultado->num_rows > 0){
 
     $tabela = [];
-
-    if($resultado->num_rows > 0){
-        while($linha = $resultado->fetch_assoc()){
-            $tabela[] = $linha;
-        }
-
-        session_start();
-        $_SESSION['email'] = $tabela;
-
-        $retorno = [
-            'status'    => 'ok',
-            'mensagem'  => 'Sucesso, consulta efetuada.',
-            'data'      => $tabela
-        ];
-    }else{
-        $retorno = [
-            'status'    => 'nok',
-            'mensagem'  => 'Não há registros',
-            'data'      => []
-        ];
+    while($linha = $resultado->fetch_assoc()){
+        $tabela[] = $linha;
     }
-   
-    $stmt->close();
-    $conexao->close();
+
+    session_start();
+    $_SESSION['email'] = $tabela[0]['email']; // só o e-mail
+    $_SESSION['usuario'] = $tabela;           // array de arrays
 
 
-    header("Content-type:application/json;charset:utf-8");
-    echo json_encode($retorno);
+    $retorno = [
+        'status'    => 'ok',
+        'mensagem'  => 'Sucesso, consulta efetuada.',
+        'data'      => $tabela
+    ];
+
+}else{
+    $retorno = [
+        'status'    => 'nok',
+        'mensagem'  => 'Não há registros',
+        'data'      => []
+    ];
+}
+
+$stmt->close();
+$conexao->close();
+
+echo json_encode($retorno);
+exit;

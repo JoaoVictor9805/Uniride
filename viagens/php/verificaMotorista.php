@@ -2,7 +2,7 @@
     session_start(); 
     header('Content-Type: application/json');
 
-    $usuario = $_SESSION['email'][0];
+    $usuario = $_SESSION['usuario'][0];
 
     $isMotorista = $usuario['motorista'] == 1;
 

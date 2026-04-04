@@ -20,9 +20,12 @@
     $preco          = $_POST['preco'];
     $tipoCarona     = $_POST['tipoCarona'];
 
-    
-    $stmt = $conexao->prepare("INSERT INTO Viagem(titulo, dataHora, pontoPartida, pontoChegada, descricao, preco, tipoCarona) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssis", $titulo, $dataHora, $pontoPartida, $pontoChegada, $descricao, $preco, $tipoCarona); 
+    session_start();
+    $usuario = $_SESSION['usuario'][0];
+    $usuario_id = $usuario['id_usuario'];  
+
+    $stmt = $conexao->prepare("INSERT INTO Viagem(titulo, dataHora, pontoPartida, pontoChegada, descricao, preco, tipoCarona, usuario_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssisi", $titulo, $dataHora, $pontoPartida, $pontoChegada, $descricao, $preco, $tipoCarona, $usuario_id); 
     $stmt->execute();
     
     if($stmt -> affected_rows > 0){

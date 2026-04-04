@@ -7,7 +7,12 @@ async function novo() {
     var senha = document.getElementById("senha").value;
     var email = document.getElementById("email").value;
     var nascimento = document.getElementById("nascimento").value;
-    var motorista = document.getElementById("motorista").checked ? 1 : 0 // Convertendo o valor booleano para 1 ou 0 (true ou false respectivamente);
+    var motorista = document.getElementById("motorista").checked ? 1 : 0 
+
+    if (!email.endsWith("@pucpr.edu.br")) {
+        alert("Use seu email institucional!");
+        return;
+    }
 
     const fd = new FormData();
     fd.append('nome', nome);
@@ -26,7 +31,7 @@ async function novo() {
     if (motorista ==  0) {
         if(resposta.status == "ok") {
             alert("Sucesso! " + resposta.mensagem);
-            window.location.href="../viagens/html/index.html";
+            window.location.href="../home/index.html";
         } else {
             alert("ERRO! " + resposta.mensagem);
         }
@@ -50,12 +55,12 @@ async function novo() {
 
         if(respostaMotorista.status == "ok" && resposta.status == "ok") {
             alert("Sucesso! redirecionando você para a página inicial.");
-            window.location.href="../viagens/html/index.html";
+            window.location.href="../home/index.html";        
         } else {
             alert(resposta.mensagem + "/" + respostaMotorista.mensagem);
         }
     }
-}
+};
 
 document.getElementById("motorista").addEventListener('change', function () {
     mostrarFormMotorista();
@@ -70,4 +75,4 @@ function mostrarFormMotorista() {
         x.style.display = "none";
     }
 
-}
+};

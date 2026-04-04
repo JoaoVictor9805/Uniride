@@ -2,34 +2,21 @@
 document.addEventListener("DOMContentLoaded", () => {
     //valida_sessao();
     
-    if (document.getElementById("lista")) {
-        carregarDados();
-        document.getElementById("buscarCarona").addEventListener("input", carregarDados);
-
+    if (document.getElementById("listaViagem")) {
+        carregarDadosViagem();
     }
 });
 
-const botaoNovo = document.getElementById("novaViagem");
-if (botaoNovo) {
-    botaoNovo.addEventListener("click", () => {
-        window.location.href = '../html/novaViagem.html';
-    });
-}
-
-async function carregarDados() {
-    const retorno = await fetch("../php/getViagem.php");
+async function carregarDadosViagem() {
+    const retorno = await fetch("../php/perfilViagem.php");
     const resposta = await retorno.json();
 
     if (resposta.status == "ok") {
-        const filtro = document.getElementById("buscarCarona").value.toLowerCase().trim();
-
-        const registros = resposta.data.filter(objeto =>
-            objeto.pontoPartida.toLowerCase().includes(filtro) ||
-            objeto.pontoChegada.toLowerCase().includes(filtro)
-        );
+        const registros = resposta.data;
 
         var html = `<table>
         <tr>
+            <th>Ações</th>
             <th>Título</th>
             <th>Descrição</th>
             <th>Ponto de Partida</th>
@@ -43,6 +30,10 @@ async function carregarDados() {
             var objeto = registros[i]
 
             html += `<tr>
+                        <td> 
+                            <a href='alterar_veiculo.html?id=${objeto.id}' class='alterar'>Alterar</a>
+                            <a href='#' onclick='excluirViagem(${objeto.id})' class='excluir'>Excluir</a>
+                        </td>
                         <td>${objeto.titulo}</td>
                         <td>${objeto.descricao}</td>
                         <td>${objeto.pontoPartida}</td>
@@ -55,9 +46,20 @@ async function carregarDados() {
         }
         html += "</table>"
 
-        document.getElementById("lista").innerHTML = html;
+        document.getElementById("listaViagem").innerHTML = html;
 
     } else {
         alert("Erro: " + resposta.mensagem);
     }
 };
+
+async function excluirViagem(id) {
+    const retorno = await fetch("../php/excluirViagem.php?id=" + id);
+    const resposta = await retorno.json();
+    if (resposta.status == "ok") {
+        alert(resposta.mensagem);
+        window.location.reload();
+    } else {
+        alert("Erro: " + resposta.mensagem)
+    }
+}

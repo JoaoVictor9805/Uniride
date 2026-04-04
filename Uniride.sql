@@ -11,12 +11,12 @@ CREATE TABLE usuario (
     motorista TINYINT NULL
 );
 
-CREATE TABLE motorista {};CREATE TABLE motorista (
+CREATE TABLE motorista (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario_id INT,
     cpf VARCHAR(14),
     dataVencimento DATE,
     numeroRegistro VARCHAR(20),
+    usuario_id INT,
 
     FOREIGN KEY (usuario_id) REFERENCES usuario(id_usuario)
 );
@@ -29,7 +29,10 @@ CREATE TABLE viagem (
     pontoChegada VARCHAR(100),
     dataHora DATETIME,
     preco INT NULL,
-    tipoCarona VARCHAR(50) NULL
+    tipoCarona VARCHAR(50) NULL,
+    usuario_id INT,
+
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id_usuario)
 );
 
 CREATE TABLE veiculo (
@@ -44,5 +47,6 @@ CREATE TABLE veiculo (
     gastoCombustivel DECIMAL(5,2),
     categoria VARCHAR(20),
     usuario_id INT,
+
     FOREIGN KEY (usuario_id) REFERENCES usuario(id_usuario)
 );

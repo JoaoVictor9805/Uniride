@@ -8,15 +8,12 @@
         
     ]; 
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $stmt = $conexao->prepare("SELECT * FROM Veiculo WHERE id = ?");
-    $stmt->bind_param("i", $id);
+    session_start();
+    $usuario = $_SESSION['usuario'][0];
+    $usuario_id = $usuario['id_usuario'];  
 
-} else {
-    $stmt = $conexao->prepare("SELECT * FROM Veiculo");
-
-}
+    $stmt = $conexao->prepare("SELECT * FROM Veiculo WHERE usuario_id = ?");
+    $stmt->bind_param("i", $usuario_id);
 
     $stmt->execute();
     $resultado = $stmt->get_result();
