@@ -31,7 +31,7 @@ async function carregarDadosViagem() {
 
             html += `<tr>
                         <td> 
-                            <a href='alterar_veiculo.html?id=${objeto.id}' class='alterar'>Alterar</a>
+                            <a href='../html/alterarViagem.html?id=${objeto.id}' class='alterar'>Alterar</a>
                             <a href='#' onclick='excluirViagem(${objeto.id})' class='excluir'>Excluir</a>
                         </td>
                         <td>${objeto.titulo}</td>
